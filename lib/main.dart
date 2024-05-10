@@ -13,16 +13,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return BlocProvider<PostBloc>(
+      create: (context) => PostBloc()..add(FetchPostData()),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const PostPage(),
+        debugShowCheckedModeBanner: false,
       ),
-      home: BlocProvider<PostBloc>(
-        create: (BuildContext context) => PostBloc()..add(FetchPostData()),
-        child: const PostPage(),
-      ),
-      debugShowCheckedModeBanner: false,
     );
   }
 }

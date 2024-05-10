@@ -11,6 +11,7 @@ part 'post_state.dart';
 class PostBloc extends Bloc<PostEvent, PostState> {
   PostBloc() : super(PostInitial()) {
     on<FetchPostData>(_onStart);
+    on<AddPost>(_onAddPost);
   }
 
   void _onStart(FetchPostData event, Emitter<PostState> emit) async {
@@ -30,6 +31,15 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       }
     } catch (e) {
       emit(PostFailureEvent(error: 'Error: $e'));
+    }
+  }
+
+  void _onAddPost(AddPost event, Emitter<PostState> emit) {
+    if (state is PostSuccessEvent) {
+      final List<Post> updatedPosts =
+          List.from((state as PostSuccessEvent).posts);
+      updatedPosts.add(event.post);
+      emit(PostSuccessEvent(posts: updatedPosts));
     }
   }
 }

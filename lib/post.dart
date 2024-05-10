@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fetch_post/bloc/post_bloc.dart';
 
+import 'new_post.dart';
 import 'widgets/post_container.dart';
 
 class PostPage extends StatefulWidget {
@@ -60,6 +61,27 @@ class _PostPageState extends State<PostPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          Navigator.of(context).push(
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  NewPostPage(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                const begin =
+                    Offset(0.0, 1.0); // Start the animation from bottom
+                const end = Offset.zero; // End the animation at the top
+                const curve = Curves.ease;
+
+                var tween = Tween(begin: begin, end: end)
+                    .chain(CurveTween(curve: curve));
+
+                return SlideTransition(
+                  position: animation.drive(tween),
+                  child: child,
+                );
+              },
+            ),
+          );
         },
         child: const Icon(Icons.add),
       ),
