@@ -38,20 +38,43 @@ class _PostPageState extends State<PostPage> {
           if (state is PostLoadingEvent) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is PostSuccessEvent) {
-            return RefreshIndicator(
-              onRefresh: () async {
-                BlocProvider.of<PostBloc>(context).add(FetchPostData());
-              },
-              child: ListView.builder(
-                itemCount: state.posts.length,
-                itemBuilder: (context, index) {
-                  final post = state.posts[index];
-                  return PostContainer(
-                    data: post,
-                  );
-                },
-              ),
-            );
+            return RefreshIndicator(onRefresh: () async {
+              BlocProvider.of<PostBloc>(context).add(FetchPostData());
+            }, child: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+              double screenWidth = constraints.maxWidth;
+              double screenHeight = constraints.maxHeight;
+
+              double devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+
+              String deviceType;
+              if (screenWidth >= 2556) {
+                deviceType = 'IPHONE14';
+              } else if (screenWidth >= 1536) {
+                deviceType = 'IPADAIR';
+              } else {
+                deviceType = 'IPHONE8';
+              }
+
+              return Align(
+                alignment: Alignment.center,
+                child: SizedBox(
+                  width: deviceType == "IPADAIR"
+                      ? MediaQuery.of(context).size.width *
+                          0.6 // Adjust the width for iPad
+                      : MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                    itemCount: state.posts.length,
+                    itemBuilder: (context, index) {
+                      final post = state.posts[index];
+                      return PostContainer(
+                        data: post,
+                      );
+                    },
+                  ),
+                ),
+              );
+            }));
           } else if (state is PostFailureEvent) {
             return Center(child: Text(state.error));
           } else {
