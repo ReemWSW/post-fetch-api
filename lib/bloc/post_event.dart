@@ -10,3 +10,9 @@ class AddPost extends PostEvent {
 
   AddPost({required this.post});
 }
+
+class DeletePost extends PostEvent {
+  final int postId;
+
+  DeletePost(this.postId);
+}

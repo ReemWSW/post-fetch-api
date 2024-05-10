@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider<PostBloc>(
       create: (context) => PostBloc()..add(FetchPostData()),
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Post Fetch API',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

@@ -12,6 +12,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   PostBloc() : super(PostInitial()) {
     on<FetchPostData>(_onStart);
     on<AddPost>(_onAddPost);
+    on<DeletePost>(_onDeletePost);
   }
 
   void _onStart(FetchPostData event, Emitter<PostState> emit) async {
@@ -39,6 +40,15 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       final List<Post> updatedPosts =
           List.from((state as PostSuccessEvent).posts);
       updatedPosts.add(event.post);
+      emit(PostSuccessEvent(posts: updatedPosts));
+    }
+  }
+
+  void _onDeletePost(DeletePost event, Emitter<PostState> emit) {
+    if (state is PostSuccessEvent) {
+      final List<Post> updatedPosts =
+          List.from((state as PostSuccessEvent).posts);
+      updatedPosts.removeWhere((post) => post.id == event.postId);
       emit(PostSuccessEvent(posts: updatedPosts));
     }
   }
