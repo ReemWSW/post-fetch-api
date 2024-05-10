@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fetch_post/bloc/post_bloc.dart';
 
-import 'widget.dart';
+import 'widgets/widget.dart';
 
 class PostPage extends StatefulWidget {
   const PostPage({super.key});
