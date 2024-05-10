@@ -1,5 +1,7 @@
+import 'package:fetch_post/bloc/post_bloc.dart';
 import 'package:fetch_post/model/post_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PostContainer extends StatelessWidget {
   final Post data;
@@ -40,7 +42,9 @@ class PostContainer extends StatelessWidget {
                         child: const Icon(
                           Icons.more_vert,
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          _showConfirmationDialog(context, data.id!);
+                        },
                       )
                     ],
                   ),
@@ -63,6 +67,43 @@ class PostContainer extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _showConfirmationDialog(BuildContext context, int postId) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirm Deletion'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Are you sure you want to delete this post?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text(
+                'Delete',
+                style: TextStyle(color: Colors.red),
+              ),
+              onPressed: () {
+                BlocProvider.of<PostBloc>(context).add(DeletePost(postId));
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
