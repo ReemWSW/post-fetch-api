@@ -13,7 +13,7 @@ class PostContainer extends StatelessWidget {
     return GestureDetector(
       child: Container(
         width: MediaQuery.of(context).size.width,
-        color: Colors.white,
+        color: Colors.black12,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
       create: (context) => PostBloc()..add(FetchPostData()),
       child: MaterialApp(
         title: 'Post Fetch API',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+        theme: ThemeData.dark().copyWith(
+          primaryColor: Colors.blueGrey[900],
         ),
         home: const PostPage(),
         debugShowCheckedModeBanner: false,
