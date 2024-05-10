@@ -20,33 +20,29 @@ class PostContainer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'User ID: ${data.userId}',
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(width: 20),
-                            Text(
-                              'ID: ${data.id}',
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        InkWell(
-                          child: const Icon(
-                            Icons.more_vert,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'User ID: ${data.userId}',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          onTap: () {},
-                        )
-                      ],
-                    ),
+                          const SizedBox(width: 20),
+                          Text(
+                            'ID: ${data.id}',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      InkWell(
+                        child: const Icon(
+                          Icons.more_vert,
+                        ),
+                        onTap: () {},
+                      )
+                    ],
                   ),
                   const SizedBox(height: 8),
                   Text(
