@@ -1,6 +1,8 @@
+import 'package:fetch_post/bloc/post_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'screens/home.dart';
+import 'post.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +18,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: BlocProvider<PostBloc>(
+        create: (BuildContext context) => PostBloc()..add(FetchPostData()),
+        child: const PostPage(),
+      ),
       debugShowCheckedModeBanner: false,
     );
   }
