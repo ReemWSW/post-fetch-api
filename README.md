@@ -30,8 +30,8 @@ The application is designed to work on various devices, adjusting the size and l
 
 ### Image
 
-![ScreenShot](picture/1.png)
+![ScreenShot](picture/1.PNG)
 
-![ScreenShot](picture/3.png)
+![ScreenShot](picture/3.PNG)
 
-![ScreenShot](picture/2.png)
+![ScreenShot](picture/2.PNG)
